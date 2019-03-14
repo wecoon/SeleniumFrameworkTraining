@@ -1,6 +1,6 @@
 ## Test Automation Framework Training
 
-Test automation framework built for training purposes
+Test automation framework built for training purposes.  
 Amazon (Europe location) was selected as demo website.
 
 ### Setup
