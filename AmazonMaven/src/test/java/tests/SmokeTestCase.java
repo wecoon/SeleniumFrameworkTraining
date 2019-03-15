@@ -51,9 +51,10 @@ public class SmokeTestCase extends AmazonBase {
 				+ "deliver and refund lease, thanks");
 		
 		GlobalPage.submitButton().click();
+		assertTrue(ShippingAddressPage.ImportantMessageErrorIsNotShown());
+
 		GlobalPage.submitButton().click();
 		
-		assertTrue(ShippingAddressPage.ImportantMessageErrorIsNotShown());
 //BUG:	Makes with the same logic as soft assert in test above
 	}
 	
@@ -61,12 +62,25 @@ public class SmokeTestCase extends AmazonBase {
 			description="Test proceeds to the payment and fills CC information, SMOKE")
 	public void FillCCSmoke()
 	{
-		PaymentPage.ccNameField().sendKeys("Dulce Campbell");
-		PaymentPage.ccNumberField().sendKeys("4865398914894674");
-//		softAssert every step
-		PaymentPage.SelectCcValidM("8");
-		PaymentPage.SelectCcValidY("2023");
+		String expectedCCname = "Dulce Campbell";
+		String expectedCCNumber = "4865398914894674";
+		String expectedCCM = "08";
+		String expectedCCY = "2023";
+//Task: Move to DataProvider
 		
+		PaymentPage.ccNameField().sendKeys(expectedCCname);
+		PaymentPage.ccNumberField().sendKeys(expectedCCNumber);
+		
+		PaymentPage.ccValidMListButton("01").click();
+		PaymentPage.ccValidMListItem(expectedCCM).click();
+		
+		PaymentPage.ccValidYListButton("2019").click();
+		PaymentPage.ccValidYListItem(expectedCCY).click();
+		
+		softAssert.assertEquals(PaymentPage.ccNameField().getAttribute("value"), expectedCCname);
+		softAssert.assertEquals(PaymentPage.ccNumberField().getAttribute("value"), expectedCCNumber);
+		softAssert.assertEquals(PaymentPage.ccValidMListButton(expectedCCM).isDisplayed(), true);
+		softAssert.assertEquals(PaymentPage.ccValidYListButton(expectedCCY).isDisplayed(), true);
 		softAssert.assertAll();
  	}
 	

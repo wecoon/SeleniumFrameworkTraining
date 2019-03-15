@@ -1,20 +1,16 @@
 ## Test Automation Framework Training
 
-Test automation framework built for training purposes
+Test automation framework built for training purposes.  
 Amazon (Europe location) was selected as demo website.
 
 ### Setup
 * Install [Java SE Development Kit 8u201](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * Install [Eclipse IDE](https://www.eclipse.org/downloads/)
 * Install [Apache Maven 3.6.0](https://maven.apache.org/download.cgi)
-* Make sure jdk1.8.0 is used by Eclipse
-![Installed JREs - jdk1.8.0_](https://i.ibb.co/PjMnTgc/jdk180.png =150x)
+* Make sure [jdk1.8.0 is used by Eclipse](https://i.ibb.co/PjMnTgc/jdk180.png)
 * Import AmazonMaven project from file system
-* Update Project with Maven if it haven't updated yet
-![Maven Update Project](https://i.ibb.co/QXnL6yz/Maven-Update-Project.png =150x)
-* Run testng.xml As TestNG Suite
-![Maven Update Project](https://i.ibb.co/JyHgM2J/Test-NGrun.png =150x)
-
+* [Update Project with Maven](https://i.ibb.co/QXnL6yz/Maven-Update-Project.png) if it haven't updated yet
+* [Run testng.xml](https://i.ibb.co/JyHgM2J/Test-NGrun.png) As TestNG Suite
 
 ### Built With
 * Selenium-Java
