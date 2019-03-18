@@ -16,21 +16,21 @@ public class ItemPage extends AmazonBase{
 	}
 	
 
-	public static void AddToCart() {
+	public static WebElement AddToCartButton() {
 		
 		logger.debug("adding to cart");
 
 		if (driver.findElements(By.id("add-to-cart-button")).size() > 0) {
 			WebElement addToCart = driver.findElement(By.id("add-to-cart-button"));
-			addToCart.click();
+			return addToCart;
 		}
 		else if(driver.findElements(By.id("add-to-cart-button-ubb")).size() > 0) {
 			WebElement addToCart = driver.findElement(By.id("add-to-cart-button-ubb"));
-			addToCart.click();
+			return addToCart;
 		}
 		else {
 			WebElement addToCart = driver.findElement(By.cssSelector("[data-clickedbuttontype=\"addToCart\"]"));
-			addToCart.click();
+			return addToCart;
 		}
 	}
 //TASK:	Maybe do separate button and use what is actually needed e.g. addToCartButton, addUsedToCartButton, addMp3ToCartButton	
