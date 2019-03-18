@@ -18,10 +18,10 @@ public class AddedPage extends AmazonBase{
 	}
 	
 	
-	public static String AddedToCartMessage() {
+	public static WebElement addedToCartMessage() {
 		
 		logger.debug("getting added to cart message");
-		String addedToCartMessage = driver.findElement(By.tagName("h1")).getText();
+		WebElement addedToCartMessage = driver.findElement(By.tagName("h1"));
 		return addedToCartMessage;
 	}
 	

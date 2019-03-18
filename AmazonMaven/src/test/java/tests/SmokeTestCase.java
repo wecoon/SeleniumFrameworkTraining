@@ -1,10 +1,6 @@
 package tests;
 
-import static org.testng.Assert.assertTrue;
-
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import amazon.AmazonBase;
 import amazon.Pages.AddedPage;
 import amazon.Pages.GlobalPage;
@@ -14,26 +10,29 @@ import amazon.Pages.SearchResultsPage;
 import amazon.Pages.ShippingAddressPage;
 
 public class SmokeTestCase extends AmazonBase {
-	@BeforeClass
-	public void FindAndOpenItem() 
+	
+	
+	@Test(description="find and add item")
+	public void FindAndOpenItemSmoke() 
 	{
 		GlobalPage.Search("The Dark Side of the Moon");
 		SearchResultsPage.OpenItemByImgUrl("https://m.media-amazon.com/images/I/61PEh3IyaeL._AC_UL436_.jpg");
+		hardAssert.assertTrue(ItemPage.AddToCartButton().isDisplayed());
 	}
 
 	
-	@Test(description="Test adds an item to the cart, SMOKE")
+	@Test(dependsOnMethods = {"FindAndOpenItemSmoke"},
+			description="add item to cart")
 	public void AddtoCartSmoke()
 	{
 		ItemPage.SelectItemType("Audio CD");
-		ItemPage.AddToCart();
-		
-		softAssert.assertEquals(AddedPage.AddedToCartMessage(), "Added to Cart");
-//BUG:	Not soft assert? If an item add to cart fails, it wont go to next step
+		ItemPage.AddToCartButton().click();
+		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 	}
 	
+	
 	@Test(dependsOnMethods = {"AddtoCartSmoke"}, 
-			description="Test fills address form and submits it, SMOKE")
+			description="fill and submit address form")
 	public void SubmitAddressSmoke()
 	{
 		logger.debug("proceeding to added item checkout");
@@ -49,24 +48,37 @@ public class SmokeTestCase extends AmazonBase {
 				+ "is being done by automated test built by "
 				+ "Selenium for Java, therefore, do not "
 				+ "deliver and refund lease, thanks");
-		
-		GlobalPage.submitButton().click();
 		GlobalPage.submitButton().click();
 		
-		assertTrue(ShippingAddressPage.ImportantMessageErrorIsNotShown());
-//BUG:	Makes with the same logic as soft assert in test above
+		hardAssert.assertTrue(ShippingAddressPage.ImportantMessageErrorIsNotShown());
+
+		GlobalPage.submitButton().click();
 	}
 	
-	@Test(dependsOnMethods = {"AddtoCartSmoke", "SubmitAddressSmoke"},
-			description="Test proceeds to the payment and fills CC information, SMOKE")
+	
+	@Test(dependsOnMethods = {"SubmitAddressSmoke"},
+			description="fill CC form")
 	public void FillCCSmoke()
 	{
-		PaymentPage.ccNameField().sendKeys("Dulce Campbell");
-		PaymentPage.ccNumberField().sendKeys("4865398914894674");
-//		softAssert every step
-		PaymentPage.SelectCcValidM("8");
-		PaymentPage.SelectCcValidY("2023");
+		String expectedCCname = "Dulce Campbell";
+		String expectedCCNumber = "4865398914894674";
+		String expectedCCM = "08";
+		String expectedCCY = "2023";
+//Task: Move to DataProvider
 		
+		PaymentPage.ccNameField().sendKeys(expectedCCname);
+		PaymentPage.ccNumberField().sendKeys(expectedCCNumber);
+		
+		PaymentPage.ccValidMListButton("01").click();
+		PaymentPage.ccValidMListItem(expectedCCM).click();
+		
+		PaymentPage.ccValidYListButton("2019").click();
+		PaymentPage.ccValidYListItem(expectedCCY).click();
+		
+		softAssert.assertEquals(PaymentPage.ccNameField().getAttribute("value"), expectedCCname);
+		softAssert.assertEquals(PaymentPage.ccNumberField().getAttribute("value"), expectedCCNumber);
+		softAssert.assertEquals(PaymentPage.ccValidMListButton(expectedCCM).isDisplayed(), true);
+		softAssert.assertEquals(PaymentPage.ccValidYListButton(expectedCCY).isDisplayed(), true);
 		softAssert.assertAll();
  	}
 	

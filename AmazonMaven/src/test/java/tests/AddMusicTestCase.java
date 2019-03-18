@@ -23,41 +23,42 @@ public class AddMusicTestCase extends AmazonBase {
 	public static void AddMp3ToCart() 
 	{		
 		ItemPage.SelectItemType("MP3");
-		ItemPage.AddToCart();
-		
-//TASK:	Assert
-		
+		ItemPage.AddToCartButton().click();
+		softAssert.assertTrue(ItemPage.AddToCartButton().isDisplayed());		
 	}
 		
+	
 	@Test(priority = 1, description="Add all types of music items and removed them from the carts")
 	public static void AddCDToCart() 
 	{		
 		ItemPage.SelectItemType("Audio CD");
-		ItemPage.AddToCart();
+		ItemPage.AddToCartButton().click();
 		
-		softAssert.assertEquals(AddedPage.AddedToCartMessage(), "Added to Cart");
+		softAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		
 		AddedPage.GetBackToTheItem();
 	}
+	
 	
 	@Test(priority = 1, description="Add all types of music items and removed them from the carts")
 	public static void AddVinylToCart() 
 	{
 		ItemPage.SelectItemType("Vinyl");
-		ItemPage.AddToCart();
+		ItemPage.AddToCartButton().click();
 		
-		softAssert.assertEquals(AddedPage.AddedToCartMessage(), "Added to Cart");
+		softAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		
 		AddedPage.GetBackToTheItem();
 	}
 
+	
 	@Test(priority = 1, description="Add all types of music items and removed them from the carts")
 	public static void AddCassetteToCart() 
 	{		
 		ItemPage.SelectItemType("Audio, Cassette");
-		ItemPage.AddToCart();
+		ItemPage.AddToCartButton().click();
 		
-		softAssert.assertEquals(AddedPage.AddedToCartMessage(), "Added to Cart");
+		softAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		
 		AddedPage.GetBackToTheItem();
 	}
@@ -67,12 +68,9 @@ public class AddMusicTestCase extends AmazonBase {
 		
 		ItemPage.SelectItemType("Vinyl");	
 		ItemPage.SelectQuantity("5");
-		ItemPage.AddToCart();
+		ItemPage.AddToCartButton().click();
 		
-		softAssert.assertEquals(AddedPage.AddedToCartMessage(), "Added to Cart");
-		
-		AddedPage.GetBackToTheItem();
-		
+		softAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		softAssert.assertAll();
 	}
 }
