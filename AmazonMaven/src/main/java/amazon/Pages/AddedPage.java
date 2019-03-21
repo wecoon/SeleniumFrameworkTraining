@@ -1,5 +1,6 @@
 package amazon.Pages;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,7 +22,9 @@ public class AddedPage extends AmazonBase{
 	public static WebElement addedToCartMessage() {
 		
 		logger.debug("getting added to cart message");
-		WebElement addedToCartMessage = driver.findElement(By.tagName("h1"));
+		
+		WebElement addedToCartMessage = (new WebDriverWait(driver, 3))
+				   .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#huc-v2-order-row-confirm-text > h1")));
 		return addedToCartMessage;
 	}
 	

@@ -19,58 +19,88 @@ public class AddMusicTestCase extends AmazonBase {
 	}
 	
 
-	@Test(priority = 1, description="Add all types of music items and removed them from the carts")
+	@Test(description="Add Mp3 to Cart")
 	public static void AddMp3ToCart() 
 	{		
-		ItemPage.SelectItemType("MP3");
-		ItemPage.AddToCartButton().click();
-		softAssert.assertTrue(ItemPage.AddToCartButton().isDisplayed());		
+		ItemPage.selectItemType("MP3").click();
+		ItemPage.AddMp3ToCartButton().click();
+		hardAssert.assertFalse(ItemPage.AddMp3ToCartButton().isDisplayed());	
 	}
 		
 	
-	@Test(priority = 1, description="Add all types of music items and removed them from the carts")
+	@Test(description="Add CD to Cart")
 	public static void AddCDToCart() 
 	{		
-		ItemPage.SelectItemType("Audio CD");
+		ItemPage.selectItemType("Audio CD").click();
 		ItemPage.AddToCartButton().click();
 		
-		softAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
+		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		
 		AddedPage.GetBackToTheItem();
 	}
 	
 	
-	@Test(priority = 1, description="Add all types of music items and removed them from the carts")
+	@Test(description="Add Vinyl to Cart")
 	public static void AddVinylToCart() 
 	{
-		ItemPage.SelectItemType("Vinyl");
+		ItemPage.selectItemType("Vinyl").click();
 		ItemPage.AddToCartButton().click();
 		
-		softAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
+		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		
 		AddedPage.GetBackToTheItem();
 	}
 
 	
-	@Test(priority = 1, description="Add all types of music items and removed them from the carts")
+	@Test(description="Add Cassette to Cart")
 	public static void AddCassetteToCart() 
 	{		
-		ItemPage.SelectItemType("Audio, Cassette");
+		ItemPage.selectItemType("Audio, Cassette").click();
 		ItemPage.AddToCartButton().click();
 		
-		softAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
+		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		
 		AddedPage.GetBackToTheItem();
 	}
 	
-	@Test(priority = 2, description="Test added and removed 5 Audio CDs")
-	public static void Add5VinylssToCart() {
+	
+	@Test(description="Add Used CD to Cart") 
+	public static void AddUsedCDToCart()
+	{
+		ItemPage.selectByConditionType("Audio CD", "Used").click();
+		ItemPage.AddOldToCartButton().click();
+		/*Amazon has few different ways to describe Add To Cart button element, and
+		  for used items they use lower case "cart" ("Add to Cart" vs. "Add to cart").
+		  Therefore, separate WebElement for old item add to cart functionality is 
+		  being used. However, this might be a bug or strange design decision*/
 		
-		ItemPage.SelectItemType("Vinyl");	
-		ItemPage.SelectQuantity("5");
-		ItemPage.AddToCartButton().click();
+		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		
-		softAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
-		softAssert.assertAll();
+		AddedPage.GetBackToTheItem();
+	}
+	
+	
+	@Test(description="Add Used Vinyl to Cart") 
+	public static void AddUsedVinylToCart()
+	{
+		ItemPage.selectByConditionType("Vinyl", "Used").click();
+		ItemPage.AddOldToCartButton().click();
+		
+		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
+		
+		AddedPage.GetBackToTheItem();
+	}
+	
+	
+	@Test(description="Add Used Cassette to Cart") 
+	public static void AddUsedCassetteToCart()
+	{
+		ItemPage.selectByConditionType("Audio, Cassette", "Used").click();
+		ItemPage.AddOldToCartButton().click();
+		
+		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
+		
+		AddedPage.GetBackToTheItem();
 	}
 }
+

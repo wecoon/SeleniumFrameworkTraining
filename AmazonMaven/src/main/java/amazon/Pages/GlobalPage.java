@@ -24,6 +24,14 @@ public class GlobalPage extends AmazonBase {
 	}
 
 	
+	public static int cartCount() {
+		
+		WebElement cartCount = driver.findElement(By.id("nav-cart-count"));
+		
+		int cartCountint = Integer.parseInt(cartCount.getText());
+		return cartCountint;
+	}
+	
 	public static WebElement submitButton() {
 
 		WebElement submitButton = driver.findElement(By.cssSelector("input[type=\"submit\"]"));

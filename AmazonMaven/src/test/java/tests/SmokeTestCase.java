@@ -17,7 +17,7 @@ public class SmokeTestCase extends AmazonBase {
 	{
 		GlobalPage.Search("The Dark Side of the Moon");
 		SearchResultsPage.OpenItemByImgUrl("https://m.media-amazon.com/images/I/61PEh3IyaeL._AC_UL436_.jpg");
-		hardAssert.assertTrue(ItemPage.AddToCartButton().isDisplayed());
+		hardAssert.assertTrue(ItemPage.AddMp3ToCartButton().isDisplayed());
 	}
 
 	
@@ -25,7 +25,7 @@ public class SmokeTestCase extends AmazonBase {
 			description="add item to cart")
 	public void AddtoCartSmoke()
 	{
-		ItemPage.SelectItemType("Audio CD");
+		ItemPage.selectItemType("Audio CD").click();
 		ItemPage.AddToCartButton().click();
 		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 	}

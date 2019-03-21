@@ -5,9 +5,9 @@ import org.testng.asserts.IAssert;
 
 public class CustomHardAssert extends Assertion{
 
-		@Override
-		public void onAssertFailure(IAssert<?> assertCommand, AssertionError ex) {
-		      Methods.takeScreenshot();
-		}
+	@Override
+	public void onAssertFailure(IAssert<?> assertCommand, AssertionError ex) {
+		Methods.takeScreenshot();
+	}
 }
 

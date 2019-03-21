@@ -7,6 +7,6 @@ public class CustomSoftAssert extends SoftAssert {
 	
 	@Override
 	public void onAssertFailure(IAssert<?> a, AssertionError ex) {
-	      Methods.takeScreenshot();
+		Methods.takeScreenshot();
 	}
 }
