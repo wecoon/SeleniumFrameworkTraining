@@ -48,7 +48,14 @@ public class ShippingAddressPage extends AmazonBase{
 		WebElement addressInstructionsField = driver.findElement(By.id("AddressInstructions"));
 		return addressInstructionsField;
 	}
-
+	
+	
+	public static WebElement importantMessageError() {
+				
+		WebElement importantMessageError = driver.findElements(By.tagName("h4")).
+				stream().filter(e -> e.getText().equals("Important Message")).findFirst().get();
+		return importantMessageError;
+	}
 	
 	public static void SelectCountry(String countryName) {
 		
@@ -57,15 +64,9 @@ public class ShippingAddressPage extends AmazonBase{
 		countryList.selectByVisibleText(countryName);
 	}
 	
-	
-	public static Boolean ImportantMessageErrorIsNotShown() {
+	public static WebElement shipSpeedDiv() {
 		
-		try {
-			driver.findElements(By.tagName("h4")).stream().filter(e -> e.getText().equals("Important Message")).findFirst().get();
-			return false;
-		}
-		catch(Exception NoSuchElement){
-			return true;
-		}
+		WebElement shipSpeedDiv = driver.findElement(By.className("ship-speed"));
+		return shipSpeedDiv;
 	}
 }

@@ -25,7 +25,7 @@ public class AddMusicMultipleTestCase extends AmazonBase{
 		int quantity = 5;
 		ItemPage.selectItemType("Vinyl").click();	
 		ItemPage.SelectQuantity(quantity);
-		ItemPage.AddToCartButton().click();
+		ItemPage.addToCartButton().click();
 		
 		hardAssert.assertEquals(GlobalPage.cartCount(), a + quantity);
 		
@@ -37,7 +37,7 @@ public class AddMusicMultipleTestCase extends AmazonBase{
 		
 		ItemPage.selectItemType("Audio CD").click();	
 		ItemPage.SelectMaxQuantity();
-		ItemPage.AddToCartButton().click();
+		ItemPage.addToCartButton().click();
 				
 		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		/*Amazon does not update quantity options based on added items,

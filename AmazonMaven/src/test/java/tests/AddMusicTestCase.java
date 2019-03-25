@@ -8,6 +8,7 @@ import amazon.Pages.AddedPage;
 import amazon.Pages.GlobalPage;
 import amazon.Pages.ItemPage;
 import amazon.Pages.SearchResultsPage;
+import assets.Methods;
 
 public class AddMusicTestCase extends AmazonBase {
 	
@@ -23,8 +24,10 @@ public class AddMusicTestCase extends AmazonBase {
 	public static void AddMp3ToCart() 
 	{		
 		ItemPage.selectItemType("MP3").click();
-		ItemPage.AddMp3ToCartButton().click();
-		hardAssert.assertFalse(ItemPage.AddMp3ToCartButton().isDisplayed());	
+		ItemPage.addMp3ToCartButton().click();
+		
+		Methods.WaitInvisibility(ItemPage.addMp3ToCartButton());
+		hardAssert.assertFalse(ItemPage.addMp3ToCartButton().isDisplayed());	
 	}
 		
 	
@@ -32,7 +35,7 @@ public class AddMusicTestCase extends AmazonBase {
 	public static void AddCDToCart() 
 	{		
 		ItemPage.selectItemType("Audio CD").click();
-		ItemPage.AddToCartButton().click();
+		ItemPage.addToCartButton().click();
 		
 		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		
@@ -44,7 +47,7 @@ public class AddMusicTestCase extends AmazonBase {
 	public static void AddVinylToCart() 
 	{
 		ItemPage.selectItemType("Vinyl").click();
-		ItemPage.AddToCartButton().click();
+		ItemPage.addToCartButton().click();
 		
 		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		
@@ -56,7 +59,7 @@ public class AddMusicTestCase extends AmazonBase {
 	public static void AddCassetteToCart() 
 	{		
 		ItemPage.selectItemType("Audio, Cassette").click();
-		ItemPage.AddToCartButton().click();
+		ItemPage.addToCartButton().click();
 		
 		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		
@@ -68,7 +71,7 @@ public class AddMusicTestCase extends AmazonBase {
 	public static void AddUsedCDToCart()
 	{
 		ItemPage.selectByConditionType("Audio CD", "Used").click();
-		ItemPage.AddOldToCartButton().click();
+		ItemPage.addOldToCartButton().click();
 		/*Amazon has few different ways to describe Add To Cart button element, and
 		  for used items they use lower case "cart" ("Add to Cart" vs. "Add to cart").
 		  Therefore, separate WebElement for old item add to cart functionality is 
@@ -84,7 +87,7 @@ public class AddMusicTestCase extends AmazonBase {
 	public static void AddUsedVinylToCart()
 	{
 		ItemPage.selectByConditionType("Vinyl", "Used").click();
-		ItemPage.AddOldToCartButton().click();
+		ItemPage.addOldToCartButton().click();
 		
 		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		
@@ -96,7 +99,7 @@ public class AddMusicTestCase extends AmazonBase {
 	public static void AddUsedCassetteToCart()
 	{
 		ItemPage.selectByConditionType("Audio, Cassette", "Used").click();
-		ItemPage.AddOldToCartButton().click();
+		ItemPage.addOldToCartButton().click();
 		
 		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		

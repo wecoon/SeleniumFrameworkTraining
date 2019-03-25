@@ -12,7 +12,7 @@ import amazon.AmazonBase;
 public class ItemPage extends AmazonBase{
 	
 	
-	public static WebElement AddToCartButton() {
+	public static WebElement addToCartButton() {
 		
 		logger.debug("adding to cart");
 		
@@ -21,18 +21,18 @@ public class ItemPage extends AmazonBase{
 	}
 
 	
-	public static WebElement AddOldToCartButton() {
+	public static WebElement addOldToCartButton() {
 		
 		WebElement addOldToCart = driver.findElement(By.cssSelector("[value=\"Add to cart\"]"));
 		return addOldToCart;
 	}
 	
-	public static WebElement AddMp3ToCartButton() {
+	public static WebElement addMp3ToCartButton() {
 	
-		WebElement addToCart = driver.findElement(By.cssSelector("[data-clickedbuttontype=\"addToCart\"]"));
-		return addToCart;
+		WebElement addMp3ToCart = driver.findElement(By.cssSelector("[data-clickedbuttontype=\"addToCart\"]"));
+		return addMp3ToCart;
 	}
-	
+
 	public static WebElement quantityField() {
 		
 		WebElement quantityField = driver.findElement(By.id("quantity"));

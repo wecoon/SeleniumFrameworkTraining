@@ -7,7 +7,7 @@ public class CustomHardAssert extends Assertion{
 
 	@Override
 	public void onAssertFailure(IAssert<?> assertCommand, AssertionError ex) {
-		Methods.takeScreenshot();
+		Methods.TakeScreenshot();
 	}
 }
 

@@ -9,6 +9,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
 import amazon.AmazonBase;
@@ -22,10 +24,16 @@ public class Methods extends AmazonBase{
 		Actions hover = new Actions(driver);
 		hover.moveToElement(hoverItem);
 		hover.perform();
-		}
+	}
 
 
-	public static void takeScreenshot() {
+	public static void WaitInvisibility(WebElement webElement) {
+		
+		new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(webElement));
+	}
+	
+	
+	public static void TakeScreenshot() {
 		
 		String pattern = "yyyy-MM-dd HH mm ss SSS";
 		SimpleDateFormat simpleDateFormat =
@@ -41,6 +49,6 @@ public class Methods extends AmazonBase{
 		}
 		catch (Exception e) {
 				e.printStackTrace();
-			}
 		}
+	}
 }
