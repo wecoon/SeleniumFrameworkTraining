@@ -1,7 +1,6 @@
 package tests;
 
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import amazon.AmazonBase;
@@ -9,19 +8,10 @@ import amazon.Pages.AddedPage;
 import amazon.Pages.GlobalPage;
 import amazon.Pages.ItemPage;
 import amazon.Pages.SearchResultsPage;
+import assets.CommonDataProviders;
 import assets.Methods;
 
 public class AddMusicTestCase extends AmazonBase {
-	
-	@DataProvider
-	protected Object[][] musicProvider() {
-		return new Object[][] {
-			{"Audio CD"},
-			{"Vinyl"},
-			{"Audio, Cassette"}
-		};
-	}
-	
 	
 	@BeforeClass
 	public static void FindItem()
@@ -42,7 +32,7 @@ public class AddMusicTestCase extends AmazonBase {
 	}
 		
 		
-	@Test(dataProvider = "musicProvider")
+	@Test(dataProvider = "musicProvider", dataProviderClass = CommonDataProviders.class)
 	public static void AddToCart(String musicItemType) 
 	{		
 		ItemPage.selectItemType(musicItemType).click();
@@ -54,7 +44,7 @@ public class AddMusicTestCase extends AmazonBase {
 	}
 	
 	
-	@Test(dataProvider = "musicProvider") 
+	@Test(dataProvider = "musicProvider", dataProviderClass = CommonDataProviders.class) 
 	public static void AddUsedToCart(String musicItemType)
 	{
 		ItemPage.selectByConditionType(musicItemType, "Used").click();

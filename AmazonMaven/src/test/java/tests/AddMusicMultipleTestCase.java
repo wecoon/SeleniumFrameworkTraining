@@ -1,7 +1,6 @@
 package tests;
 
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import amazon.AmazonBase;
@@ -9,17 +8,10 @@ import amazon.Pages.AddedPage;
 import amazon.Pages.GlobalPage;
 import amazon.Pages.ItemPage;
 import amazon.Pages.SearchResultsPage;
+import assets.CommonDataProviders;
 
 public class AddMusicMultipleTestCase extends AmazonBase{
 
-	@DataProvider
-	protected Object[][] musicProvider() {
-		return new Object[][] {
-			{"Audio CD"},
-			{"Vinyl"},
-		};
-	}
-	
 	@BeforeClass
 	public static void FindItem()
 	{
@@ -28,7 +20,7 @@ public class AddMusicMultipleTestCase extends AmazonBase{
 	}
 	
 	
-	@Test(dataProvider = "musicProvider") 
+	@Test(dataProvider = "allMusicProvider", dataProviderClass = CommonDataProviders.class) 
 	public static void Add5VinylsToCart(String musicItemType) {
 		
 		int a = GlobalPage.cartCount();
@@ -43,7 +35,7 @@ public class AddMusicMultipleTestCase extends AmazonBase{
 	}
 	
 	
-	@Test(dataProvider = "musicProvider") 
+	@Test(dataProvider = "allMusicProvider", dataProviderClass = CommonDataProviders.class) 
 	public static void AddMaxQuantity(String musicItemType) {
 		
 		ItemPage.selectItemType(musicItemType).click();	

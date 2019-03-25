@@ -31,9 +31,7 @@ public class AddressesPage extends AmazonBase{
 	
 			logger.debug("choosing address to delete");
 			deleteButton().click();
-			
-	
-			logger.debug("waiting 500ms for modal to fade in");
+
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			js.executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 500);");	
 			

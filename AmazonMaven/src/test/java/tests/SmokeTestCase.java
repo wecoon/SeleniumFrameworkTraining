@@ -62,9 +62,8 @@ public class SmokeTestCase extends AmazonBase {
 	{
 		String expectedCCname = "Dulce Campbell";
 		String expectedCCNumber = "4865398914894674";
-		String expectedCCM = "08";
+		String expectedCCM = "11";
 		String expectedCCY = "2023";
-//Task: Move to DataProvider
 		
 		PaymentPage.ccNameField().sendKeys(expectedCCname);
 		PaymentPage.ccNumberField().sendKeys(expectedCCNumber);
@@ -74,11 +73,11 @@ public class SmokeTestCase extends AmazonBase {
 		
 		PaymentPage.ccValidYListButton("2019").click();
 		PaymentPage.ccValidYListItem(expectedCCY).click();
-		
+
 		softAssert.assertEquals(PaymentPage.ccNameField().getAttribute("value"), expectedCCname);
 		softAssert.assertEquals(PaymentPage.ccNumberField().getAttribute("value"), expectedCCNumber);
-		softAssert.assertEquals(PaymentPage.ccValidMListButton(expectedCCM).isDisplayed(), true);
-		softAssert.assertEquals(PaymentPage.ccValidYListButton(expectedCCY).isDisplayed(), true);
+		softAssert.assertTrue(PaymentPage.ccValidMListButton(expectedCCM).isDisplayed());
+		softAssert.assertTrue(PaymentPage.ccValidYListButton(expectedCCY).isDisplayed());
 		softAssert.assertAll();
  	}
 	

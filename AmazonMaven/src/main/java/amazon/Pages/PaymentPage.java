@@ -31,23 +31,25 @@ public class PaymentPage extends AmazonBase {
 		return ccValidMListButton; 
 	}
 	
-	public static WebElement ccValidMListItem(String MM) {
-		
-		String M = MM.substring(MM.length() - 1); 
-		WebElement ccValidMListItem = driver.findElement(By.cssSelector("[data-value=\"" + M + "\"]"));
-
-		return ccValidMListItem; 
-	}
 	
 	public static WebElement ccValidYListButton(String Default2019) {
-		
+
 		WebElement ccValidYListButton = driver.findElements(By.className("a-dropdown-prompt"))
 				.stream().filter(e -> e.getText().equals(Default2019)).findFirst().get();
 		return ccValidYListButton; 
 	}
 	
-	public static WebElement ccValidYListItem(String YYYY) {
+	
+	public static WebElement ccValidMListItem(String MM) {
 		
+		int M = Integer.parseInt(MM);	
+		WebElement ccValidMListItem = driver.findElement(By.cssSelector("[data-value=\"" + M + "\"]"));
+		return ccValidMListItem; 
+	}
+	
+	
+	public static WebElement ccValidYListItem(String YYYY) {
+
 		WebElement ccValidYListItem = driver.findElement(By.cssSelector("[data-value=\"" + YYYY + "\"]"));
 		return ccValidYListItem; 
 	}
