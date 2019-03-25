@@ -1,6 +1,7 @@
 package tests;
 
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import amazon.AmazonBase;
@@ -11,6 +12,14 @@ import amazon.Pages.SearchResultsPage;
 
 public class AddMusicMultipleTestCase extends AmazonBase{
 
+	@DataProvider
+	protected Object[][] musicProvider() {
+		return new Object[][] {
+			{"Audio CD"},
+			{"Vinyl"},
+		};
+	}
+	
 	@BeforeClass
 	public static void FindItem()
 	{
@@ -18,12 +27,13 @@ public class AddMusicMultipleTestCase extends AmazonBase{
 		SearchResultsPage.OpenItemByImgUrl("https://m.media-amazon.com/images/I/61PEh3IyaeL._AC_UL436_.jpg");
 	}
 	
-	@Test(description="Add 5 Vinyls")
-	public static void Add5VinylsToCart() {
+	
+	@Test(dataProvider = "musicProvider") 
+	public static void Add5VinylsToCart(String musicItemType) {
 		
 		int a = GlobalPage.cartCount();
 		int quantity = 5;
-		ItemPage.selectItemType("Vinyl").click();	
+		ItemPage.selectItemType(musicItemType).click();	
 		ItemPage.SelectQuantity(quantity);
 		ItemPage.addToCartButton().click();
 		
@@ -32,10 +42,11 @@ public class AddMusicMultipleTestCase extends AmazonBase{
 		AddedPage.GetBackToTheItem();
 	}
 	
-	@Test(description="Add max CD quantity") 
-	public static void AddMaxCDQuantity() {
+	
+	@Test(dataProvider = "musicProvider") 
+	public static void AddMaxQuantity(String musicItemType) {
 		
-		ItemPage.selectItemType("Audio CD").click();	
+		ItemPage.selectItemType(musicItemType).click();	
 		ItemPage.SelectMaxQuantity();
 		ItemPage.addToCartButton().click();
 				
@@ -44,7 +55,5 @@ public class AddMusicMultipleTestCase extends AmazonBase{
 		  so AddtoCart will succeed with SelectMaxQuantity if that item
 		  have not been added yet*/
 		AddedPage.GetBackToTheItem();
-
 	}
-	
 }

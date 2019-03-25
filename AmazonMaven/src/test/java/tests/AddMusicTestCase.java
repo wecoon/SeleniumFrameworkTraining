@@ -1,6 +1,7 @@
 package tests;
 
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import amazon.AmazonBase;
@@ -12,6 +13,16 @@ import assets.Methods;
 
 public class AddMusicTestCase extends AmazonBase {
 	
+	@DataProvider
+	protected Object[][] musicProvider() {
+		return new Object[][] {
+			{"Audio CD"},
+			{"Vinyl"},
+			{"Audio, Cassette"}
+		};
+	}
+	
+	
 	@BeforeClass
 	public static void FindItem()
 	{
@@ -20,7 +31,7 @@ public class AddMusicTestCase extends AmazonBase {
 	}
 	
 
-	@Test(description="Add Mp3 to Cart")
+	@Test()
 	public static void AddMp3ToCart() 
 	{		
 		ItemPage.selectItemType("MP3").click();
@@ -30,11 +41,11 @@ public class AddMusicTestCase extends AmazonBase {
 		hardAssert.assertFalse(ItemPage.addMp3ToCartButton().isDisplayed());	
 	}
 		
-	
-	@Test(description="Add CD to Cart")
-	public static void AddCDToCart() 
+		
+	@Test(dataProvider = "musicProvider")
+	public static void AddToCart(String musicItemType) 
 	{		
-		ItemPage.selectItemType("Audio CD").click();
+		ItemPage.selectItemType(musicItemType).click();
 		ItemPage.addToCartButton().click();
 		
 		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
@@ -43,63 +54,15 @@ public class AddMusicTestCase extends AmazonBase {
 	}
 	
 	
-	@Test(description="Add Vinyl to Cart")
-	public static void AddVinylToCart() 
+	@Test(dataProvider = "musicProvider") 
+	public static void AddUsedToCart(String musicItemType)
 	{
-		ItemPage.selectItemType("Vinyl").click();
-		ItemPage.addToCartButton().click();
-		
-		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
-		
-		AddedPage.GetBackToTheItem();
-	}
-
-	
-	@Test(description="Add Cassette to Cart")
-	public static void AddCassetteToCart() 
-	{		
-		ItemPage.selectItemType("Audio, Cassette").click();
-		ItemPage.addToCartButton().click();
-		
-		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
-		
-		AddedPage.GetBackToTheItem();
-	}
-	
-	
-	@Test(description="Add Used CD to Cart") 
-	public static void AddUsedCDToCart()
-	{
-		ItemPage.selectByConditionType("Audio CD", "Used").click();
+		ItemPage.selectByConditionType(musicItemType, "Used").click();
 		ItemPage.addOldToCartButton().click();
 		/*Amazon has few different ways to describe Add To Cart button element, and
 		  for used items they use lower case "cart" ("Add to Cart" vs. "Add to cart").
 		  Therefore, separate WebElement for old item add to cart functionality is 
 		  being used. However, this might be a bug or strange design decision*/
-		
-		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
-		
-		AddedPage.GetBackToTheItem();
-	}
-	
-	
-	@Test(description="Add Used Vinyl to Cart") 
-	public static void AddUsedVinylToCart()
-	{
-		ItemPage.selectByConditionType("Vinyl", "Used").click();
-		ItemPage.addOldToCartButton().click();
-		
-		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
-		
-		AddedPage.GetBackToTheItem();
-	}
-	
-	
-	@Test(description="Add Used Cassette to Cart") 
-	public static void AddUsedCassetteToCart()
-	{
-		ItemPage.selectByConditionType("Audio, Cassette", "Used").click();
-		ItemPage.addOldToCartButton().click();
 		
 		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		
