@@ -43,9 +43,7 @@ public class AddMusicMultipleTestCase extends AmazonBase{
 		ItemPage.addToCartButton().click();
 				
 		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
-		/*Amazon does not update quantity options based on added items,
-		  so AddtoCart will succeed with SelectMaxQuantity if that item
-		  have not been added yet*/
+
 		AddedPage.GetBackToTheItem();
 	}
 }

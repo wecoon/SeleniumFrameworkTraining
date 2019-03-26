@@ -26,16 +26,18 @@ public class PaymentPage extends AmazonBase {
 	
 	public static WebElement ccValidMListButton(String Default01) {
 		
+
 		WebElement ccValidMListButton = driver.findElements(By.className("a-dropdown-prompt"))
-				.stream().filter(e -> e.getText().equals(Default01)).findFirst().get();
-		return ccValidMListButton; 
+				.stream().filter(e -> e.getText().equals(Default01)).findFirst().orElse(null);
+		return ccValidMListButton;
+
 	}
 	
 	
 	public static WebElement ccValidYListButton(String Default2019) {
 
 		WebElement ccValidYListButton = driver.findElements(By.className("a-dropdown-prompt"))
-				.stream().filter(e -> e.getText().equals(Default2019)).findFirst().get();
+				.stream().filter(e -> e.getText().equals(Default2019)).findFirst().orElse(null);
 		return ccValidYListButton; 
 	}
 	

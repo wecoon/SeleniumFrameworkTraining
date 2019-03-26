@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
+
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -27,9 +29,25 @@ public class Methods extends AmazonBase{
 	}
 
 
-	public static void WaitInvisibility(WebElement webElement) {
+	public static void WaitInvisibility(WebElement invisibleElement) {
 		
-		new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(webElement));
+		new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOf(invisibleElement));
+	}
+	
+	
+	public static boolean retryingStaleClick(WebElement faultyElement) {
+	    boolean result = false;
+	    int attempts = 0;
+	    while(attempts < 2) {
+	        try {
+	        	faultyElement.click();
+	            result = true;
+	            break;
+	        } catch(StaleElementReferenceException e) {
+	        }
+	        attempts++;
+	    }
+	    return result;
 	}
 	
 	

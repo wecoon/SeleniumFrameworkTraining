@@ -8,6 +8,7 @@ import amazon.Pages.ItemPage;
 import amazon.Pages.PaymentPage;
 import amazon.Pages.SearchResultsPage;
 import amazon.Pages.ShippingAddressPage;
+import assets.Methods;
 
 public class SmokeTestCase extends AmazonBase {
 	
@@ -73,11 +74,12 @@ public class SmokeTestCase extends AmazonBase {
 		
 		PaymentPage.ccValidYListButton("2019").click();
 		PaymentPage.ccValidYListItem(expectedCCY).click();
+//		Methods.retryingStaleClick(PaymentPage.ccValidYListItem(expectedCCY));
 
 		softAssert.assertEquals(PaymentPage.ccNameField().getAttribute("value"), expectedCCname);
 		softAssert.assertEquals(PaymentPage.ccNumberField().getAttribute("value"), expectedCCNumber);
-		softAssert.assertTrue(PaymentPage.ccValidMListButton(expectedCCM).isDisplayed());
-		softAssert.assertTrue(PaymentPage.ccValidYListButton(expectedCCY).isDisplayed());
+		softAssert.assertNotNull(PaymentPage.ccValidMListButton(expectedCCM));
+		softAssert.assertNotNull(PaymentPage.ccValidYListButton(expectedCCY));
 		softAssert.assertAll();
  	}
 	

@@ -49,10 +49,6 @@ public class AddMusicTestCase extends AmazonBase {
 	{
 		ItemPage.selectByConditionType(musicItemType, "Used").click();
 		ItemPage.addOldToCartButton().click();
-		/*Amazon has few different ways to describe Add To Cart button element, and
-		  for used items they use lower case "cart" ("Add to Cart" vs. "Add to cart").
-		  Therefore, separate WebElement for old item add to cart functionality is 
-		  being used. However, this might be a bug or strange design decision*/
 		
 		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
 		

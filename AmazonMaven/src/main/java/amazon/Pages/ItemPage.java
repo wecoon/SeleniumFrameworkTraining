@@ -22,6 +22,10 @@ public class ItemPage extends AmazonBase{
 
 	
 	public static WebElement addOldToCartButton() {
+		/*Amazon has few different ways to describe Add To Cart button element, and
+		  for used items they use lower case "cart" ("Add to Cart" vs. "Add to cart").
+		  Therefore, separate WebElement for old item add to cart functionality is 
+		  being used. However, this might be a bug or strange design decision*/
 		
 		WebElement addOldToCart = driver.findElement(By.cssSelector("[value=\"Add to cart\"]"));
 		return addOldToCart;
@@ -49,6 +53,9 @@ public class ItemPage extends AmazonBase{
 	
 	
 	public static void SelectMaxQuantity() {
+		/*Amazon does not update quantity options based on added items,
+		  so AddtoCart will succeed with SelectMaxQuantity if that item
+		  have not been added yet*/
 		
 		logger.debug("selecting maximum quantity");
 		
