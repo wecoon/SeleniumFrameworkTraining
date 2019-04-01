@@ -26,16 +26,14 @@ public class PaymentPage extends AmazonBase {
 	
 	public static WebElement ccValidMListButton(String Default01) {
 		
-
 		WebElement ccValidMListButton = driver.findElements(By.className("a-dropdown-prompt"))
 				.stream().filter(e -> e.getText().equals(Default01)).findFirst().orElse(null);
 		return ccValidMListButton;
-
 	}
 	
 	
 	public static WebElement ccValidYListButton(String Default2019) {
-
+						
 		WebElement ccValidYListButton = driver.findElements(By.className("a-dropdown-prompt"))
 				.stream().filter(e -> e.getText().equals(Default2019)).findFirst().orElse(null);
 		return ccValidYListButton; 
@@ -54,5 +52,12 @@ public class PaymentPage extends AmazonBase {
 
 		WebElement ccValidYListItem = driver.findElement(By.cssSelector("[data-value=\"" + YYYY + "\"]"));
 		return ccValidYListItem; 
+	}
+	
+	
+	public static WebElement ccBackground() {
+		
+		WebElement ccBackground = driver.findElement(By.id("new-payment-methods"));
+		return ccBackground; 
 	}
 }

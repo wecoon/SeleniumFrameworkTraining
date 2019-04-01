@@ -8,7 +8,6 @@ import amazon.Pages.ItemPage;
 import amazon.Pages.PaymentPage;
 import amazon.Pages.SearchResultsPage;
 import amazon.Pages.ShippingAddressPage;
-import assets.Methods;
 
 public class SmokeTestCase extends AmazonBase {
 	
@@ -67,14 +66,15 @@ public class SmokeTestCase extends AmazonBase {
 		String expectedCCY = "2023";
 		
 		PaymentPage.ccNameField().sendKeys(expectedCCname);
-		PaymentPage.ccNumberField().sendKeys(expectedCCNumber);
 		
 		PaymentPage.ccValidMListButton("01").click();
 		PaymentPage.ccValidMListItem(expectedCCM).click();
 		
+		PaymentPage.ccNumberField().sendKeys(expectedCCNumber);
+		
 		PaymentPage.ccValidYListButton("2019").click();
 		PaymentPage.ccValidYListItem(expectedCCY).click();
-//		Methods.retryingStaleClick(PaymentPage.ccValidYListItem(expectedCCY));
+//Bug:	selecting year and month one after another sometimes leads in nosuchelement, stale errors or dropdown closing before selection
 
 		softAssert.assertEquals(PaymentPage.ccNameField().getAttribute("value"), expectedCCname);
 		softAssert.assertEquals(PaymentPage.ccNumberField().getAttribute("value"), expectedCCNumber);

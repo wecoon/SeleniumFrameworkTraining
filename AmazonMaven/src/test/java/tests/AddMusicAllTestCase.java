@@ -10,7 +10,7 @@ import amazon.Pages.ItemPage;
 import amazon.Pages.SearchResultsPage;
 import assets.CommonDataProviders;
 
-public class AddMusicMultipleTestCase extends AmazonBase{
+public class AddMusicAllTestCase extends AmazonBase{
 
 	@BeforeClass
 	public static void FindItem()
@@ -21,16 +21,14 @@ public class AddMusicMultipleTestCase extends AmazonBase{
 	
 	
 	@Test(dataProvider = "allMusicProvider", dataProviderClass = CommonDataProviders.class) 
-	public static void Add5VinylsToCart(String musicItemType) {
+	public static void AddMaxQuantity(String musicItemType) {
 		
-		int a = GlobalPage.cartCount();
-		int quantity = 5;
 		ItemPage.selectItemType(musicItemType).click();	
-		ItemPage.SelectQuantity(quantity);
+		ItemPage.SelectMaxQuantity();
 		ItemPage.addToCartButton().click();
-		
-		hardAssert.assertEquals(GlobalPage.cartCount(), a + quantity);
-		
+				
+		hardAssert.assertEquals(AddedPage.addedToCartMessage().getText(), "Added to Cart");
+
 		AddedPage.GetBackToTheItem();
 	}
 }
