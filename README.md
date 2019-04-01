@@ -10,6 +10,7 @@ Amazon (Europe location) was selected as demo website.
 * Make sure [jdk1.8.0 is used by Eclipse](https://i.ibb.co/PjMnTgc/jdk180.png)
 * Import AmazonMaven project from file system
 * [Update Project with Maven](https://i.ibb.co/QXnL6yz/Maven-Update-Project.png) if it haven't updated yet
+* [You May Need to Install TestNG](https://i.ibb.co/FX5X5mn/Screenshot-2019-03-27-at-09-48-50.png): Help > Install New Software
 * [Run testng.xml](https://i.ibb.co/JyHgM2J/Test-NGrun.png) As TestNG Suite
 
 ### Built With
