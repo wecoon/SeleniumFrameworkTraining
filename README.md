@@ -1,8 +1,11 @@
 ## Test Automation Framework Training
 
 Test automation framework for Amazon, built to understand Selenium test automation concepts. 
-Some good practises were not used to contain training schedule and familiarize with Selenium basics. 
+
+Some good practises were not used to contain training schedule and familiarize with Selenium basics.
+
 At the moment, framework is not being maintained.
+
 Amazon (Europe location) was selected as demo website.
 
 ### Setup
